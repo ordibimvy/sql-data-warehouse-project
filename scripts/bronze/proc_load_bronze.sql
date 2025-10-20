@@ -16,6 +16,7 @@ Usage Example:
   EXEC bronze.load_bronze;
 ===============================================================================
 */
+
 CREATE OR ALTER PROCEDURE bronze.load_bronze AS 
 BEGIN 
     DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME;
@@ -42,9 +43,9 @@ BEGIN TRY
             ROWTERMINATOR = '\n',
             TABLOCK
         );
-        SET @end_time = GETDATE()
-        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds'
-        PRINT '-------'
+        SET @end_time = GETDATE();
+        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+        PRINT '-------';
 
         SET @start_time = GETDATE();
         PRINT '>> Tuncating Table: bronze.crm_prd_info';
@@ -59,9 +60,9 @@ BEGIN TRY
             ROWTERMINATOR = '\n',
             TABLOCK
         );
-        SET @end_time = GETDATE()
-        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds'
-        PRINT '-------'
+        SET @end_time = GETDATE();
+        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+        PRINT '-------';
 
 
         SET @start_time = GETDATE();
@@ -77,9 +78,9 @@ BEGIN TRY
             ROWTERMINATOR = '\n',
             TABLOCK
         );
-        SET @end_time = GETDATE()
-        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds'
-        PRINT '-------'
+        SET @end_time = GETDATE();
+        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+        PRINT '-------';
 
         PRINT '-------------------------------------------';
         PRINT 'Loading ERP Tables';
@@ -98,9 +99,9 @@ BEGIN TRY
             ROWTERMINATOR = '\n',
             TABLOCK
         );
-        SET @end_time = GETDATE()
-        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds'
-        PRINT '-------'
+        SET @end_time = GETDATE();
+        PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds';
+        PRINT '-------';
 
 
         SET @start_time = GETDATE();
@@ -116,7 +117,7 @@ BEGIN TRY
             ROWTERMINATOR = '\n',
             TABLOCK
         );
-        SET @end_time = GETDATE()
+        SET @end_time = GETDATE();
         PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds'
         PRINT '-------'
 
@@ -134,7 +135,7 @@ BEGIN TRY
             ROWTERMINATOR = '\n',
             TABLOCK
         );
-        SET @end_time = GETDATE()
+        SET @end_time = GETDATE();
         PRINT '>> Load Duration: ' + CAST(DATEDIFF(second, @start_time, @end_time) AS NVARCHAR) + ' seconds'
         PRINT '-------'
 
@@ -147,11 +148,10 @@ BEGIN TRY
     END TRY 
     BEGIN CATCH
         PRINT '=================================='
-        PRINT ' ERROR OCCURED DURING LOADING BRONZE LAYER'
-        PRINT 'Error Message' + ERROR_MESSAGE();
-        PRINT 'Error Message' + CAST (ERROR_NUMBER() AS NVARCHAR);
-        PRINT 'Error Message' + CAST (ERROR_STATE() AS NVARCHAR);
-
+        PRINT 'Error Message: ' + ERROR_MESSAGE();
+        PRINT 'Error Number: ' + CAST(ERROR_NUMBER() AS NVARCHAR);
+        PRINT 'Error State: ' + CAST(ERROR_STATE() AS NVARCHAR);
+        PRINT 'Error Line: ' + CAST(ERROR_LINE() AS NVARCHAR);
     END CATCH
 
 END
