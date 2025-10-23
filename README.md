@@ -42,3 +42,4 @@ Hey there! I’m Ordi Bimvy, a curious mind passionate about turning raw data in
 
 Ordi Bimvy Nganzobo
 📍 Thomas College | Computer Science & Data Science Student
+
